@@ -21,7 +21,7 @@ class Adressen(models.Model):
     date_modified = models.DateTimeField(auto_now = True, blank = False)
 
     def __str__(self):
-        return str(self.firma)
+        return str(self.firma) + ", " + str(self.adresse)
     
 class Rechnungsempfaenger(models.Model):
     id = models.AutoField(primary_key=True,unique=True,blank=False)
