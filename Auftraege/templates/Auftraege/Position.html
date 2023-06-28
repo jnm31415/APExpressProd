@@ -1,0 +1,174 @@
+{% extends 'Auftraege/navbar.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>APExpress</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <style>
+            body{
+                font-family: Roboto;
+
+            }
+
+            .flex-row {
+                display: flex;
+            }
+            .wrapper {
+                border: 1px solid #4b00ff;
+                border-right: 0;
+            }
+            canvas#signature-pad {
+                background: #fff;
+                width: 100% !important;
+                height: 100%;
+                cursor: crosshair;
+                object-fit: contain;
+            }
+            button#clear {
+                height: 100%;
+                background: #ff0000;
+                border: 1px solid transparent;
+                color: #fff;
+                font-weight: 600;
+                cursor: pointer;
+            }
+            button#clear span {
+                transform: rotate(90deg);
+                display: block;
+            }
+            button#save {
+                height: 100%;
+                background: #2d9912;
+                border: 1px solid transparent;
+                color: #fff;
+                font-weight: 600;
+                cursor: pointer;
+            }
+            button#save span {
+                transform: rotate(90deg);
+                display: block;
+            }
+            button#show {
+                height: 100%;
+                background: #2c2ac9;
+                border: 1px solid transparent;
+                color: #fff;
+                font-weight: 600;
+                cursor: pointer;
+            }
+            button#show span {
+                transform: rotate(90deg);
+                display: block;
+            }
+
+
+
+        </style>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+
+
+        <div style="margin-top: 2rem; display: flex;justify-content: center;">
+            <h2>Auftragsposition bearbeiten</h2>
+        </div>
+
+        <div class="container-fluid" style="width:80%;margin-top: 2rem;">
+            <form action="" method="POST" id="formsign";>
+                {% csrf_token %}
+                {{form.as_p}}
+                <button style="display:flex;" class="btn btn-secondary mx-auto" type="submit">Submit</button>          
+            </form>
+        </div>
+        <div class="container-fluid" style="display: flex;justify-content: center;margin-top: 2rem;">
+        <div class="flex-row">
+            <div class="wrapper">
+                <canvas id="signature-pad" width="600px" height="300px"></canvas>
+            </div>
+            <div class="clear-btn">
+                <button id="clear"><span> Clear </span></button>
+            </div>
+            <div class="save-btn">
+                <button id="save"><span> Save </span></button>
+            </div>
+            <div class="show-btn">
+                <button id="show"><span> Show </span></button>
+            </div>
+
+        </div>
+        </div>
+    
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.3.5/signature_pad.min.js" integrity="sha512-kw/nRM/BMR2XGArXnOoxKOO5VBHLdITAW00aG8qK4zBzcLVZ4nzg7/oYCaoiwc8U9zrnsO9UHqpyljJ8+iqYiQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            var canvas = document.getElementById("signature-pad");
+            const today = new Date()
+
+            function resizeCanvas() {
+                const ratio =  Math.max(window.devicePixelRatio || 1, 1);
+                canvas.width = canvas.offsetWidth * ratio;
+                canvas.height = canvas.offsetHeight * ratio;
+                canvas.getContext("2d").scale(ratio, ratio);
+            }
+            //window.onorientationchange = resizeCanvas;
+             //   resizeCanvas();
+            
+
+            
+
+            function format(inputDate) {
+            let date, month, year;
+
+            date = inputDate.getDate();
+            month = inputDate.getMonth() + 1;
+            year = inputDate.getFullYear();
+
+                date = date
+                    .toString()
+                    .padStart(2, '0');
+
+                month = month
+                    .toString()
+                    .padStart(2, '0');
+
+            return `${year}-${month}-${date}`;
+            }
+
+
+
+
+            var signaturePad = new SignaturePad(canvas, {
+                backgroundColor: 'rgb(250,250,250)',
+            });
+
+            document.getElementById("clear").addEventListener('click', function(){
+                signaturePad.clear();
+            })
+
+            document.getElementById("show").addEventListener('click', function(){
+                var w = window.open("about:blank")
+                w.document.body.appendChild(w.document.createElement('iframe')).src = document.getElementById("id_unterschrift").value;
+                w.document.body.style.margin = 0;
+                w.document.getElementsByTagName("iframe")[0].style.width = '100%';
+                w.document.getElementsByTagName("iframe")[0].style.height = '100%';
+                w.document.getElementsByTagName("iframe")[0].style.border = 0;
+            })
+
+            document.getElementById("save").addEventListener('click', function(){
+                document.getElementById("id_unterschrift").value = signaturePad.toDataURL();
+                document.getElementById("id_unterschrift_datum").value = format(new Date);
+                document.getElementById("id_position_abgeschlossen").checked = true;
+                signaturePad.clear();
+                document.getElementById("formsign").submit();
+            })
+
+        
+        </script>
+
+    </body>
+</html>
+{% endblock %}
