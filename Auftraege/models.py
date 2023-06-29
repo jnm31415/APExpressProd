@@ -69,8 +69,8 @@ class Auftrag(models.Model):
 
         
 class Auftragspositionen(models.Model):
-    BUS = "BUS"
-    PKW = "PKW"
+    BUS = "Bus"
+    PKW = "Pkw"
     VEHICLE_CHOICES = ((BUS,"Bus"),(PKW,"Pkw"))
 
 
