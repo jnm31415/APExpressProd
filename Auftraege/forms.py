@@ -19,7 +19,7 @@ class UA10NAForm(ModelForm):
       'auftragsdatum': forms.TextInput(attrs={'class':'form-control mx-auto', 'type':'date'}),
       'ausgeführt_bis': forms.TextInput(attrs={'class':'form-control mx-auto', 'type':'date'}),
       'auftragsfirma': forms.Select(attrs={'class':'form-select mx-auto'}),
-      'fahrer': forms.Select(attrs={'class':'form-select mx-auto'}),
+      'fahrer': forms.TextInput(attrs={'class':'form-control mx-auto'}),
       'auftragstext':forms.Textarea(attrs={'class':'form-control','rows':'1'}),
       'angenommen': forms.CheckboxInput(attrs={'class':'check-box-input'})
     }
