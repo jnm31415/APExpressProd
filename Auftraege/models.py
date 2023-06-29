@@ -81,7 +81,7 @@ class Auftragspositionen(models.Model):
     kostenstelle = models.CharField(max_length=20,blank=True,null=True)
     referenz = models.TextField(blank=True,null=True)
     einzelpreis = models.FloatField(blank=True, null=True)
-    mwst = models.IntegerField(blank=True,null=True)
+    mwst = models.IntegerField(blank=True,null=True,default=19)
     anzahl = models.FloatField(blank=True, null=True) 
     fahrzeuge = models.CharField(choices=VEHICLE_CHOICES,default=BUS,blank=True,null=True,max_length=10)
     pauschale = models.FloatField(blank=True, null=True)
