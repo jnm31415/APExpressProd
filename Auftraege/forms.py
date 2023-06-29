@@ -40,8 +40,10 @@ class Position(ModelForm):
       'mwst': forms.NumberInput(attrs={'class':'form-control'}),
       'anzahl': forms.NumberInput(attrs={'class':'form-control'}),
       'unterschrift_datum':forms.TextInput(attrs={'class':'form-control mx-auto','readonly':'readonly'}),
-      'unterschrift':forms.Textarea(attrs={'class':'form-control mx-auto','rows':'1','readonly':'readonly'})
-
+      'unterschrift':forms.Textarea(attrs={'class':'form-control mx-auto','rows':'1','readonly':'readonly'}),
+      'fahrzeug':forms.Select(attrs={'class':'form-select mx-auto'}),
+      'wartezeit':forms.NumberInput(attrs={'class':'form-control'}),
+      'pauschale':forms.NumberInput(attrs={'class':'form-control'})
     }  
 
 
