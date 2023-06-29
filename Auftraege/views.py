@@ -210,7 +210,7 @@ def invoice(request,pk):
         #
         invoice_data += [{'pos': i+1, 'beschreibung': 'Transport mit ' + pos.values('fahrzeuge')[i]['fahrzeuge'] + '\n' + '(Wartezeit: ' + str(pos.values('wartezeit')[i]['wartezeit']) + 'min' + ' , Fixpreis: ' + '{0:.{1}f}'.format(round(pos.values('pauschale')[i]['pauschale'],2), 2) + '€)\n' + 'Von: ' + v.firma + '\n' + 'Nach: ' + n.firma + '\n' + 'Kostenstelle: ' + pos.values('kostenstelle')[i]['kostenstelle'],'anzahl': pos.values('anzahl')[i]['anzahl'],'preis': '{0:.{1}f}'.format(float(round(pos.values('einzelpreis')[i]['einzelpreis'],2)), 2), 'mwst': '{0:.{1}f}'.format(round(pos.values('mwst')[i]['mwst'],2),2), 'total':'{0:.{1}f}'.format(round(pos.values('anzahl')[i]['anzahl']*pos.values('einzelpreis')[i]['einzelpreis']+pos.values('anzahl')[i]['anzahl']*pos.values('einzelpreis')[i]['einzelpreis']/100*pos.values('mwst')[i]['mwst']+pos.values('pauschale')[i]['pauschale']+pos.values('pauschale')[i]['pauschale']/100*pos.values('mwst')[i]['mwst']),2) ,'referenz':pos.values('referenz')[i]['referenz']}]
         total_price += float(invoice_data[i]['total'])
-        mw = mw + round(float(invoice_data[i]['preis'])*float(invoice_data[i]['anzahl'])/100*float(invoice_data[i]['mwst'])+float(invoice_data[i]['pauschale'])/100*float(invoice_data[i]['mwst']),2)
+        mw = mw + round(float(invoice_data[i]['preis'])*float(invoice_data[i]['anzahl'])/100*float(invoice_data[i]['mwst']),2)
       for item in invoice_data:
           data.append([item['pos'], item['beschreibung'],int(item['anzahl']), item['preis'], item['mwst'], item['total'],Paragraph(item['referenz'],style1)])
 
