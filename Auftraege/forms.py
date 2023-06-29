@@ -34,14 +34,14 @@ class Position(ModelForm):
       'nach': forms.Select(attrs={'class':'form-select mx-auto'}),
       'kostenstelle':forms.TextInput(attrs={'class':'form-control mx-auto'}),
       'referenz': forms.Textarea(attrs={'class':'form-control mx-auto','rows':'1'}),
-      'position_abgeschlossen': forms.CheckboxInput(attrs={'class':'check-box-input'}),
+      'position_abgeschlossen': forms.CheckboxInput(attrs={'class':'form-check-input'}),
       'empfänger': forms.TextInput(attrs={'class':'form-control'}),
       'einzelpreis': forms.NumberInput(attrs={'class':'form-control'}),
       'mwst': forms.NumberInput(attrs={'class':'form-control'}),
       'anzahl': forms.NumberInput(attrs={'class':'form-control'}),
       'unterschrift_datum':forms.TextInput(attrs={'class':'form-control mx-auto','readonly':'readonly'}),
       'unterschrift':forms.Textarea(attrs={'class':'form-control mx-auto','rows':'1','readonly':'readonly'}),
-      'fahrzeug':forms.TextInput(attrs={'class':'form-control mx-auto'}),
+      'fahrzeug':forms.Select(attrs={'class':'form-select mx-auto'}),
       'wartezeit':forms.NumberInput(attrs={'class':'form-control'}),
       'pauschale':forms.NumberInput(attrs={'class':'form-control'})
     }  
