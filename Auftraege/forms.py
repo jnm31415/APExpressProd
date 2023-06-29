@@ -26,6 +26,9 @@ class UA10NAForm(ModelForm):
 
 class Position(ModelForm):
   class Meta:
+    BUS = "BUS"
+    PKW = "PKW"
+    VEHICLE_CHOICES = ((BUS,"Bus"),(PKW,"Pkw"))
     model = Auftragspositionen
     fields = '__all__'
     widgets={
@@ -41,7 +44,7 @@ class Position(ModelForm):
       'anzahl': forms.NumberInput(attrs={'class':'form-control'}),
       'unterschrift_datum':forms.TextInput(attrs={'class':'form-control mx-auto','readonly':'readonly'}),
       'unterschrift':forms.Textarea(attrs={'class':'form-control mx-auto','rows':'1','readonly':'readonly'}),
-      'fahrzeug':forms.Select(attrs={'class':'form-select mx-auto'}),
+      'fahrzeug':forms.Select(choices=VEHICLE_CHOICES, attrs={'class':'form-select mx-auto'}),
       'wartezeit':forms.NumberInput(attrs={'class':'form-control'}),
       'pauschale':forms.NumberInput(attrs={'class':'form-control'})
     }  
