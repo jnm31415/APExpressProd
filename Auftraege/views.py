@@ -207,7 +207,7 @@ def invoice(request,pk):
       for i in range(len(pos.values('id'))):
         v = Adressen.objects.get(id = pos.values('von')[i]['von'])
         n = Adressen.objects.get(id = pos.values('nach')[i]['nach'])
-        invoice_data += [{'pos': i+1, 'beschreibung': 'Transport mit' + pos.values('fahrzeuge')[i]('fahrzeuge') + '\n' + 'Von: ' + v.firma + '\n' + 'Nach: ' + n.firma + '\n' + 'Kostenstelle: ' + pos.values('kostenstelle')[i]['kostenstelle'],'anzahl': pos.values('anzahl')[i]['anzahl'],'preis': float(format(pos.values('einzelpreis')[i]['einzelpreis'],".2f")), 'mwst': pos.values('mwst')[i]['mwst'], 'total': round(pos.values('anzahl')[i]['anzahl']*pos.values('einzelpreis')[i]['einzelpreis']+pos.values('anzahl')[i]['anzahl']*pos.values('einzelpreis')[i]['einzelpreis']/100*round(pos.values('mwst')[i]['mwst'],2),2),'referenz':pos.values('referenz')[i]['referenz']}]
+        invoice_data += [{'pos': i+1, 'beschreibung': 'Transport mit' + str(pos.values('fahrzeuge')[i]('fahrzeuge')) + '\n' + 'Von: ' + v.firma + '\n' + 'Nach: ' + n.firma + '\n' + 'Kostenstelle: ' + pos.values('kostenstelle')[i]['kostenstelle'],'anzahl': pos.values('anzahl')[i]['anzahl'],'preis': float(format(pos.values('einzelpreis')[i]['einzelpreis'],".2f")), 'mwst': pos.values('mwst')[i]['mwst'], 'total': round(pos.values('anzahl')[i]['anzahl']*pos.values('einzelpreis')[i]['einzelpreis']+pos.values('anzahl')[i]['anzahl']*pos.values('einzelpreis')[i]['einzelpreis']/100*round(pos.values('mwst')[i]['mwst'],2),2),'referenz':pos.values('referenz')[i]['referenz']}]
         total_price += invoice_data[i]['total']
         mw = mw + round(invoice_data[i]['preis']*invoice_data[i]['anzahl']/100*invoice_data[i]['mwst'],2)
       for item in invoice_data:
