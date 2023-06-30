@@ -216,8 +216,9 @@ def invoice(request,pk):
                           'total':'{0:.{1}f}'.format(round(pos.values('anzahl')[i]['anzahl']*pos.values('einzelpreis')[i]['einzelpreis']+pos.values('anzahl')[i]['anzahl']*pos.values('einzelpreis')[i]['einzelpreis']/100*pos.values('mwst')[i]['mwst']+pos.values('pauschale')[i]['pauschale']+pos.values('pauschale')[i]['pauschale']/100*pos.values('mwst')[i]['mwst'],2),2) , \
                           'referenz':pos.values('referenz')[i]['referenz'] \
                          }]
+        mw += float(invoice_data[i]['total'])-float(round(pos.values('einzelpreis')[i]['einzelpreis'],2))*float(pos.values('anzahl')[i]['anzahl'])-pos.values('pauschale')[i]['pauschale']
         total_price += float(invoice_data[i]['total'])
-        mw = mw + round(float(invoice_data[i]['preis'])*float(invoice_data[i]['anzahl'])/100*float(invoice_data[i]['mwst']),2)
+        #mw = mw + round(float(invoice_data[i]['preis'])*float(invoice_data[i]['anzahl'])/100*float(invoice_data[i]['mwst']),2)
         
       for item in invoice_data:
           data.append([item['pos'], item['beschreibung'],int(item['anzahl']), item['preis'], item['mwst'], item['total'],Paragraph(item['referenz'],style1)])
