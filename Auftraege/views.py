@@ -157,7 +157,7 @@ def ua20nr(request):
 def ua21ra(request):
   all_rg = Rechnung.objects.order_by('-rechnungsnummer')
   all_pos = Auftragspositionen.objects.all()
-  context = {'all_rg':all_rg, 'all_pos':all_pos, 'quer':False}
+  context = {'all_rg':all_rg, 'all_pos':all_pos}
   return render(request, 'Auftraege/UA21RA.html', context)
 
 @login_required(login_url='login')
