@@ -218,7 +218,7 @@ def invoice(request,pk):
                          }]
         total_price += float(invoice_data[i]['total'])
         #mw = mw + round(float(invoice_data[i]['preis'])*float(invoice_data[i]['anzahl'])/100*float(invoice_data[i]['mwst']),2)
-        mw = mw + round(float(invoice_data[i]['preis'])*float(invoice_data[i]['anzahl'])/100*float(invoice_data[i]['mwst']+pos.values('pauschale')[i]['pauschale']/100*pos.values('mwst')[i]['mwst']),2)
+        mw = mw + round(float(invoice_data[i]['preis'])*float(invoice_data[i]['anzahl'])/100*float(invoice_data[i]['mwst']+float(pos.values('pauschale')[i]['pauschale'])/100*float(pos.values('mwst')[i]['mwst'])),2)
       for item in invoice_data:
           data.append([item['pos'], item['beschreibung'],int(item['anzahl']), item['preis'], item['mwst'], item['total'],Paragraph(item['referenz'],style1)])
 
