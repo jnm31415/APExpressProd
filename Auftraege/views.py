@@ -355,7 +355,7 @@ def pod(request,pk):
         n = Adressen.objects.get(id = pos.values('nach')[i]['nach'])
         pod_data += [{'pos': i+1, 'beschreibung': 'Transport' + '\n' + 'Von: ' + v.firma + '\n' + 'Nach: ' + n.firma,'referenz':pos.values('referenz')[i]['referenz'],'empfänger': pos.values('empfänger')[i]['empfänger'],'datum': pos.values('unterschrift_datum')[i]['unterschrift_datum'], 'unterschrift': pos.values('unterschrift')[i]['unterschrift']}]
       for item in pod_data:
-          data.append([item['pos'], item['beschreibung'],Paragraph(item['referenz'],style1), Paragraph(item['empfänger'],style1), item['datum'],Image(item['unterschrift'],2*cm,1*cm,hAlign='RIGHT')])
+          data.append([item['pos'], item['beschreibung'],Paragraph(item['referenz'],style1), Paragraph(item['empfänger'],style1), item['datum'],Image(item['unterschrift'],2*cm,1.6*cm,hAlign='RIGHT')])
 
       #Build the table 
       t=Table(data,colWidths=[0.8*cm,7*cm,4*cm,2.5*cm,2.3*cm,2.2*cm])
