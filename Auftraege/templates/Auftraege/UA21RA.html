@@ -33,7 +33,8 @@
                 <div class="accordion-body">
                     Rechnungsempfänger: {{i.empfänger}}<br>
                     Auftragsnummer: <a href="{% url 'ua10naedit' i.auftragsnummer %}">{{i.auftragsnummer}}</a><br>
-                    {% if {{quer}}==True %}
+                    {% for p in quer %}
+                    {% if p==True %}
                         <a href="{% url 'invoice' i.auftragsnummer %}">Rechnung anzeigen</a>
                     {% endif %}
                     <div>
