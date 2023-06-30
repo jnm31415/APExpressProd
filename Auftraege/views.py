@@ -213,7 +213,7 @@ def invoice(request,pk):
                           'anzahl': pos.values('anzahl')[i]['anzahl'], \
                           'preis': '{0:.{1}f}'.format(float(round(pos.values('einzelpreis')[i]['einzelpreis'],2)), 2), \
                           'mwst': '{0:.{1}f}'.format(round(pos.values('mwst')[i]['mwst'],2),2), \
-                          'total':'{0:.{1}f}'.format(round(pos.values('anzahl')[i]['anzahl']*pos.values('einzelpreis')[i]['einzelpreis']+pos.values('anzahl')[i]['anzahl']*pos.values('einzelpreis')[i]['einzelpreis']/100*pos.values('mwst')[i]['mwst']+pos.values('pauschale')[i]['pauschale']+pos.values('pauschale')[i]['pauschale']/100*pos.values('mwst')[i]['mwst']),2) , \
+                          'total':'{0:.{1}f}'.format(round(pos.values('anzahl')[i]['anzahl']*pos.values('einzelpreis')[i]['einzelpreis']+pos.values('anzahl')[i]['anzahl']*pos.values('einzelpreis')[i]['einzelpreis']/100*pos.values('mwst')[i]['mwst']+pos.values('pauschale')[i]['pauschale']+pos.values('pauschale')[i]['pauschale']/100*pos.values('mwst')[i]['mwst'],2),2) , \
                           'referenz':pos.values('referenz')[i]['referenz'] \
                          }]
         total_price += float(invoice_data[i]['total'])
