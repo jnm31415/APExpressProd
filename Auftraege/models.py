@@ -80,7 +80,7 @@ class Auftragspositionen(models.Model):
     nach = models.ForeignKey(Adressen, null=True,blank=True,on_delete=models.PROTECT, related_name='nach')
     kostenstelle = models.CharField(max_length=20,blank=True,null=True)
     referenz = models.TextField(blank=True,null=True)
-    einzelpreis = models.FloatField(blank=True, null=True)
+    einzelpreis = models.FloatField(blank=True, null=True,default=0)
     mwst = models.IntegerField(blank=True,null=True,default=19)
     anzahl = models.FloatField(blank=True, null=True, default=1) 
     fahrzeuge = models.CharField(choices=VEHICLE_CHOICES,default=BUS,blank=True,null=True,max_length=10)
