@@ -23,6 +23,12 @@ class UA10NAForm(ModelForm):
       'auftragstext':forms.Textarea(attrs={'class':'form-control','rows':'1'}),
       'angenommen': forms.CheckboxInput(attrs={'class':'check-box-input'})
     }
+    def clean(self):
+      cleaned_data = super().clean()
+      pk = cleaned_data.get('pk')
+      if pk:
+          if MyModel.objects.filter(pk=pk).exists():
+              raise forms.ValidationError("Dieser Primärschlüssel existiert bereits.")
 
 class Position(ModelForm):
   class Meta:
