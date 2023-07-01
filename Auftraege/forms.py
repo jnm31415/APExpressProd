@@ -27,7 +27,7 @@ class UA10NAForm(ModelForm):
       cleaned_data = super().clean()
       pk = cleaned_data.get('pk')
       if pk:
-          if Auftrag.objects.filter(pk=pk).exists():
+          if MyModel.objects.filter(pk=pk).exists():
               raise forms.ValidationError("Dieser Primärschlüssel existiert bereits.")
 
 class Position(ModelForm):
