@@ -338,7 +338,7 @@ def invoice(request,pk):
       elements.append(Spacer(21.7*cm,0.5*cm))
       elements.append(rtext)
       doc.build(elements,onFirstPage=myFirstPage,onLaterPages=second)
-      canvas.Canvas("AP_Rechnung"' + rg.rechnungsnummer + "_" + str(rg.rechnungsdatum) + ".pdf").restoreState()
+      canvas.Canvas().restoreState()
 
       return response
   return generate_pdf(request)
