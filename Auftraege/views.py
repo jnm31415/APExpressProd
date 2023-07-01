@@ -177,6 +177,32 @@ def help(request):
   context = {'hilfe': hilfe}
   return render(request,'Auftraege/help.html',context)
 
+
+
+class NumberedCanvas(canvas.Canvas):
+    def __init__(self, *args, **kwargs):
+        canvas.Canvas.__init__(self, *args, **kwargs)
+        self._codes = []
+    def showPage(self):
+        self._codes.append({'code': self._code, 'stack': self._codeStack})
+        self._startPage()
+    def save(self):
+        """add page info to each page (page x of y)"""
+        # reset page counter 
+        self._pageNumber = 0
+        for code in self._codes:
+            # recall saved page
+            self._code = code['code']
+            self._codeStack = code['stack']
+            self.setFont("Helvetica", 7)
+            self.drawRightString(200*mm, 20*mm,
+                "page %(this)i of %(total)i" % {
+                   'this': self._pageNumber+1,
+                   'total': len(self._codes),
+                }
+            )
+            canvas.Canvas.showPage(self)
+
 @login_required(login_url='login')
 def invoice(request,pk):
   a = Auftrag.objects.get(auftragsnummer_ID = pk)
@@ -273,9 +299,9 @@ def invoice(request,pk):
         canvas.setLineWidth(1)
         canvas.line(0*cm,1.6*cm,21.7*cm,1.6*cm)
         canvas.saveState()
-        pagenum = canvas.getPageNumber()
-        text = "Seite %s von %s" % (pagenum,doc.page)
-        canvas.drawRightString(20*cm,2*cm,text)
+        #pagenum = canvas.getPageNumber()
+        #text = "Seite %s von %s" % (pagenum,doc.page)
+        #canvas.drawRightString(20*cm,2*cm,text)
         
         styles = getSampleStyleSheet()
         data = [['Ali Palabiyik Logistik Express','Tel.: 0176/7022 1652','Targo Bank'],
@@ -320,9 +346,9 @@ def invoice(request,pk):
         w, h = table.wrap(doc.width, doc.bottomMargin)
         table.drawOn(canvas, doc.leftMargin+0.5*cm,h-1.2*cm)
         canvas.setFont('Helvetica',10)
-        pagenum = canvas.getPageNumber()
-        text = "Seite %s von %s" % (pagenum,doc.page)
-        canvas.drawRightString(20*cm,2*cm,text)
+        #pagenum = canvas.getPageNumber()
+        #text = "Seite %s von %s" % (pagenum,doc.page)
+        #canvas.drawRightString(20*cm,2*cm,text)
        
       elements.append(im)
       elements.append(Spacer(21.7*cm,9.3*cm))
@@ -331,7 +357,7 @@ def invoice(request,pk):
       elements.append(table2)
       elements.append(Spacer(21.7*cm,0.5*cm))
       elements.append(rtext)
-      doc.build(elements,myFirstPage,second)
+      doc.build(elements,myFirstPage,second,canvasmaker=NumberedCanvas)
 
       return response
   return generate_pdf(request)
