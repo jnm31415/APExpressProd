@@ -454,7 +454,7 @@ def pod(request,pk):
       elements.append(Spacer(21.7*cm,0.5*cm))
       elements.append(t)
       elements.append(Spacer(21.7*cm,0.5*cm))
-      doc.build(elements,myFirstPage,second)
+      doc.build(elements,onFirstPage=myFirstPage,onLaterPages=second,canvasmaker=NumberedCanvas)
 
       return response
   return generate_pdf(request)
@@ -487,7 +487,7 @@ class NumberedCanvas(canvas.Canvas):
     def draw_page_number(self, page_count):
         # Change the position of this to wherever you want the page number to be
         self.drawRightString(200 * mm, 20 * mm,
-                             "Page %d of %d" % (self._pageNumber, page_count))
+                             "Seite %d von %d" % (self._pageNumber, page_count))
 
 
 
