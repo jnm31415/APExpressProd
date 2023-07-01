@@ -25,6 +25,7 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
 import time
 from django.templatetags.static import static
+from django.db import IntegrityError
 #dd
 
 
@@ -108,7 +109,11 @@ def ua10naedit(request,pk):
   form = UA10NAForm(request.POST or None, instance=auftrag)
   context={'auftrag':auftrag,'form':form}
   if form.is_valid():
-    form.save()
+    try:
+      form.save()
+    except IntegrityError:
+      form.cleaned_data['auftragsnummer_ID']=calc_auftragsnummer()
+      form.save()
     return redirect("/")
   return render(request, 'Auftraege/UA10NA.html',context)
 
