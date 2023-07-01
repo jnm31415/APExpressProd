@@ -274,7 +274,7 @@ def invoice(request,pk):
         canvas.line(0*cm,1.6*cm,21.7*cm,1.6*cm)
         canvas.saveState()
         pagenum = canvas.getPageNumber()
-        text = "Seite %s" % pagenum
+        text = "Seite %s von %s" % (pagenum,doc.page)
         canvas.drawRightString(20*cm,2*cm,text)
         
         styles = getSampleStyleSheet()
@@ -317,6 +317,9 @@ def invoice(request,pk):
         
         w, h = table.wrap(doc.width, doc.bottomMargin)
         table.drawOn(canvas, doc.leftMargin+0.5*cm,h-1.2*cm)
+        pagenum = canvas.getPageNumber()
+        text = "Seite %s von %s" % (pagenum,doc.page)
+        canvas.drawRightString(20*cm,2*cm,text)
        
       elements.append(im)
       elements.append(Spacer(21.7*cm,9.3*cm))
