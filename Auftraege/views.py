@@ -337,7 +337,7 @@ def invoice(request,pk):
       elements.append(table2)
       elements.append(Spacer(21.7*cm,0.5*cm))
       elements.append(rtext)
-      doc.build(elements,myFirstPage,second)
+      doc.build(elements,onFirstPage=myFirstPage,OnLaterPages=second)
 
       return response
   return generate_pdf(request)
