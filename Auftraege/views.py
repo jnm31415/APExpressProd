@@ -97,17 +97,7 @@ def ua10na(request):
   if request.method == "POST":
     form = UA10NAForm(request.POST)
     if form.is_valid():
-      try:
-        x = Auftrag.objects.get(auftragsnummer_ID = auftrag)
-      except Auftrag.DoesNotExist:
-        x = None
-      if x==None:
-        form.save()
-      else:
-        auftrag = calc_auftragsnummer()
-        request.POST._mutable = True
-        request.POST['auftragsnummer_ID'] = auftrag
-        form.save()
+      form.save()
       return redirect("/UA10NAPos/"+auftrag)
   context={'form':form}
   return render(request, 'Auftraege/UA10NA.html',context)
