@@ -185,8 +185,11 @@ def invoice(request,pk):
   a = Auftrag.objects.get(auftragsnummer_ID = pk)
   pos = Auftragspositionen.objects.filter(auftragsnummer=pk)
   rg = Rechnung.objects.get(auftragsnummer=pk)
-  
 
+def pagenumber(canvas,doc):
+  pagenum = canvas.getPageNumber()
+  text = "Seite %s von %s" % (pagenum,doc.page)
+  canvas.drawRightString(20*cm,2*cm,text)
 
   def generate_pdf(request):
       response = HttpResponse(content_type='application/pdf')
@@ -208,6 +211,9 @@ def invoice(request,pk):
       style3.fontSize = 8
       style3.alignment = 1
       #Creating data for table
+
+
+    
       for i in range(len(pos.values('id'))):
         v = Adressen.objects.get(id = pos.values('von')[i]['von'])
         n = Adressen.objects.get(id = pos.values('nach')[i]['nach'])
@@ -276,9 +282,8 @@ def invoice(request,pk):
         canvas.setLineWidth(1)
         canvas.line(0*cm,1.6*cm,21.7*cm,1.6*cm)
         canvas.saveState()
-        pagenum = canvas.getPageNumber()
-        text = "Seite %s von %s" % (pagenum,doc.page)
-        canvas.drawRightString(20*cm,2*cm,text)
+        pagenumber(canvas,doc)
+
         
         styles = getSampleStyleSheet()
         data = [['Ali Palabiyik Logistik Express','Tel.: 0176/7022 1652','Targo Bank'],
@@ -323,9 +328,7 @@ def invoice(request,pk):
         w, h = table.wrap(doc.width, doc.bottomMargin)
         table.drawOn(canvas, doc.leftMargin+0.5*cm,h-1.2*cm)
         canvas.setFont('Helvetica',10)
-        pagenum = canvas.getPageNumber()
-        text = "Seite %s von %s" % (pagenum,doc.page)
-        canvas.drawRightString(20*cm,2*cm,text)
+        pagenumber(canvas,doc)
        
       elements.append(im)
       elements.append(Spacer(21.7*cm,9.3*cm))
