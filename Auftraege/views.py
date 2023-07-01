@@ -319,6 +319,7 @@ def invoice(request,pk):
         
         w, h = table.wrap(doc.width, doc.bottomMargin)
         table.drawOn(canvas, doc.leftMargin+0.5*cm,h-1.2*cm)
+        canvas.setFont('Helvetica',10)
         pagenum = canvas.getPageNumber()
         text = "Seite %s von %s" % (pagenum,doc.page)
         canvas.drawRightString(20*cm,2*cm,text)
