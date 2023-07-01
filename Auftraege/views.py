@@ -186,10 +186,10 @@ def invoice(request,pk):
   pos = Auftragspositionen.objects.filter(auftragsnummer=pk)
   rg = Rechnung.objects.get(auftragsnummer=pk)
 
-def pagenumber(canvas,doc):
-  pagenum = canvas.getPageNumber()
-  text = "Seite %s von %s" % (pagenum,doc.page)
-  canvas.drawRightString(20*cm,2*cm,text)
+  def pagenumber(canvas,doc):
+    pagenum = canvas.getPageNumber()
+    text = "Seite %s von %s" % (pagenum,doc.page)
+    canvas.drawRightString(20*cm,2*cm,text)
 
   def generate_pdf(request):
       response = HttpResponse(content_type='application/pdf')
