@@ -478,7 +478,7 @@ class NumberedCanvas(canvas.Canvas):
         num_pages = len(self._saved_page_states)
         for state in self._saved_page_states:
             self.__dict__.update(state)
-            self.setFont('Helvetica', 8)
+            self.setFont('Helvetica', 10)
             self.draw_page_number(num_pages)
             self.Canvas.showPage(self)
         self.Canvas.save(self)
@@ -486,7 +486,7 @@ class NumberedCanvas(canvas.Canvas):
  
     def draw_page_number(self, page_count):
         # Change the position of this to wherever you want the page number to be
-        self.drawRightString(211 * mm, 15 * mm + (0.2 * mm),
+        self.drawRightString(200 * mm, 20 * mm,
                              "Page %d of %d" % (self._pageNumber, page_count))
 
 
