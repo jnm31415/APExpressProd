@@ -282,7 +282,7 @@ def invoice(request,pk):
         canvas.setLineWidth(1)
         canvas.line(0*cm,1.6*cm,21.7*cm,1.6*cm)
         canvas.saveState()
-        pagenumber(canvas,doc)
+        #pagenumber(canvas,doc)
 
         
         styles = getSampleStyleSheet()
@@ -328,7 +328,7 @@ def invoice(request,pk):
         w, h = table.wrap(doc.width, doc.bottomMargin)
         table.drawOn(canvas, doc.leftMargin+0.5*cm,h-1.2*cm)
         canvas.setFont('Helvetica',10)
-        pagenumber(canvas,doc)
+        #pagenumber(canvas,doc)
        
       elements.append(im)
       elements.append(Spacer(21.7*cm,9.3*cm))
@@ -337,7 +337,7 @@ def invoice(request,pk):
       elements.append(table2)
       elements.append(Spacer(21.7*cm,0.5*cm))
       elements.append(rtext)
-      doc.build(elements,onFirstPage=myFirstPage,onLaterPages=second)
+      doc.build(elements,onFirstPage=myFirstPage,onLaterPages=second,canvasmaker=NumberedCanvas)
 
       return response
   return generate_pdf(request)
@@ -458,6 +458,37 @@ def pod(request,pk):
 
       return response
   return generate_pdf(request)
+
+class NumberedCanvas(canvas.Canvas):
+
+
+    def __init__(self, *args, **kwargs):
+        canvas.Canvas.__init__(self, *args, **kwargs)
+        self.Canvas = canvas.Canvas
+        self._saved_page_states = []
+ 
+
+    def showPage(self):
+        self._saved_page_states.append(dict(self.__dict__))
+        self._startPage()
+ 
+
+    def save(self):
+        """add page info to each page (page x of y)"""
+        num_pages = len(self._saved_page_states)
+        for state in self._saved_page_states:
+            self.__dict__.update(state)
+            pdb.set_trace()
+            self.setFont('Arial', 8)
+            self.draw_page_number(num_pages)
+            self.Canvas.showPage(self)
+        self.Canvas.save(self)
+ 
+ 
+    def draw_page_number(self, page_count):
+        # Change the position of this to wherever you want the page number to be
+        self.drawRightString(211 * mm, 15 * mm + (0.2 * inch),
+                             "Page %d of %d" % (self._pageNumber, page_count))
 
 
 
