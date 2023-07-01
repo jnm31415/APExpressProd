@@ -25,7 +25,7 @@ class UA10NAForm(ModelForm):
     }
     def clean(self):
       cleaned_data = super().clean()
-      pk = cleaned_data.get('pk')
+      pk = cleaned_data.get('auftragsnummer_ID')
       if pk:
           if Auftrag.objects.filter(pk=pk).exists():
               raise forms.ValidationError("Dieser Primärschlüssel existiert bereits.")
