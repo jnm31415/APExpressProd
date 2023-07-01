@@ -273,6 +273,9 @@ def invoice(request,pk):
         canvas.setLineWidth(1)
         canvas.line(0*cm,1.6*cm,21.7*cm,1.6*cm)
         canvas.saveState()
+        pagenum = canvas.getPageNumber()
+        text = "Seite %s" % pagenum
+        canvas.DrawRightString(20*cm,2*cm,text)
         
         styles = getSampleStyleSheet()
         data = [['Ali Palabiyik Logistik Express','Tel.: 0176/7022 1652','Targo Bank'],
