@@ -301,7 +301,9 @@ def invoice(request,pk):
                       ('VALIGN',(0,0),(-1,-1),'MIDDLE')])
       
       def second(canvas,doc):
-        styles = getSampleStyleSheet()
+        styles4 = getSampleStyleSheet()
+        style4 = styles4["Normal"]
+        style4.fontSize = 10
         canvas.setLineWidth(1)
         canvas.line(0*cm,1.6*cm,21.7*cm,1.6*cm)
         canvas.saveState()
