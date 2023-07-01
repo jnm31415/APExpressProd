@@ -478,7 +478,6 @@ class NumberedCanvas(canvas.Canvas):
         num_pages = len(self._saved_page_states)
         for state in self._saved_page_states:
             self.__dict__.update(state)
-            pdb.set_trace()
             self.setFont('Arial', 8)
             self.draw_page_number(num_pages)
             self.Canvas.showPage(self)
