@@ -19,7 +19,7 @@ from .filters import *
 import io 
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
-from reportlab.lib.units import cm
+from reportlab.lib.units import cm,mm
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, TableStyle, Table
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
