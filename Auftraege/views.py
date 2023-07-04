@@ -125,9 +125,8 @@ def ua10na_pos(request,pk):
       send_mail(
         "Neuer Auftrag",
         "Das ist ein Test", 
-        ["janni24616@gmail.com"].
-        fail_silently=False,
-      )
+        ["janni24616@gmail.com"],
+        fail_silently=False)
       return redirect("/main")
   context={'formset':formset}
   return render(request,'Auftraege/UA10NAPos.html',context)
