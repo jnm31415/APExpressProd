@@ -127,7 +127,7 @@ def ua10na_pos(request,pk):
         "Neuer Auftrag " + pk + ", Auftragsfirma:" +auftrag.auftragsfirma.firma,
         "Es ist ein neuer Auftrag zu erledigen.",
         'settings.EMAIL_HOST_USER',
-        ['janni24616@gmail.com'],
+        ['alipalabiyik1@outlook.de'],
         fail_silently=False)
       return redirect("/main")
   context={'formset':formset}
