@@ -124,8 +124,8 @@ def ua10na_pos(request,pk):
     if formset.is_valid():
       formset.save()
       send_mail(
-        "Neuer Auftrag " + pk + " , Auftragsfirma:" +auftrag.auftragsfirma.firma,
-        "Es ist ein neuer Auftrag zu erledigen.",
+        "Neuer Auftrag " + pk + ", Auftragsfirma:" +auftrag.auftragsfirma.firma,
+        "Es ist ein neuer Auftrag zu erledigen." + request.POST['von'],
         'settings.EMAIL_HOST_USER',
         ['janni24616@gmail.com'],
         fail_silently=False)
