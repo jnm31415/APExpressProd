@@ -25,7 +25,7 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
 import time
 from django.templatetags.static import static
-from django.db import IntegrityError
+from django.core.mail import send_mail
 #dd
 
 
@@ -122,6 +122,12 @@ def ua10na_pos(request,pk):
     formset = position(request.POST, instance=auftrag)
     if formset.is_valid():
       formset.save()
+      send_mail(
+        "Neuer Auftrag",
+        "Das ist ein Test", 
+        ["janni24616@gmail.com"].
+        fail_silently=False,
+      )
       return redirect("/main")
   context={'formset':formset}
   return render(request,'Auftraege/UA10NAPos.html',context)
