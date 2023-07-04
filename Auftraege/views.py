@@ -53,7 +53,7 @@ def loginpage(request):
   
 @login_required(login_url='login')
 def main(request):
-  akt_auf = Auftrag.objects.filter(auftrag_abgeschlossen = False)
+  akt_auf = Auftrag.objects.filter(auftrag_abgeschlossen = False).order_by('-auftragsnummer_ID')
   context = {'akt_auf':akt_auf}
   return render(request, 'Auftraege/main.html', context)
 
