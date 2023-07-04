@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-dj89r9ksngl(ri@a%aic2_=wucu^e7&sw6wcsbqd!mj^9v_s_x
 DEBUG = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'apexpresslogistik@gmail.com'
-EMAIL_HOST_PASSWORT = 'bcle rhwx gtic yhkw'
+EMAIL_HOST_PASSWORT = 'mekveogxwjgewguk'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
