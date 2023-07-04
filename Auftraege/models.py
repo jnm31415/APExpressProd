@@ -87,9 +87,9 @@ class Auftragspositionen(models.Model):
     pauschale = models.FloatField(blank=True, null=True,default=0)
     wartezeit = models.IntegerField(blank=True,null=True,default=0)
     position_abgeschlossen = models.BooleanField( blank=True,null=True)
-    unterschrift = models.TextField(blank=True, null=True)
-    unterschrift_datum = models.DateField(blank=True, null=True)
-    empfänger = models.CharField(max_length=120,blank=True, null=True)
+    unterschrift = models.TextField(blank=True, null=True, default="-")
+    unterschrift_datum = models.DateField(blank=True, null=True, default=01-01-1900)
+    empfänger = models.CharField(max_length=120,blank=True, null=True,'-')
     date_added = models.DateTimeField(auto_now_add = True, blank = True, null=True)
     date_modified = models.DateTimeField(auto_now = True, blank = True, null=True)
 
