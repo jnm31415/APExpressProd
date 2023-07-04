@@ -26,6 +26,7 @@ from reportlab.lib import colors
 import time
 from django.templatetags.static import static
 from django.core.mail import send_mail
+from django.conf import settings
 #dd
 
 
@@ -123,9 +124,10 @@ def ua10na_pos(request,pk):
     if formset.is_valid():
       formset.save()
       send_mail(
-        "Neuer Auftrag",
-        "Das ist ein Test", 
-        ["janni24616@gmail.com"],
+        "Neuer Auftrag " + pk,
+        "Es ist ein neuer Auftrag zu erledigen.",
+        'settings.EMAIL_HOST_USER',
+        ['janni24616@gmail.com'],
         fail_silently=False)
       return redirect("/main")
   context={'formset':formset}
