@@ -124,8 +124,8 @@ def ua10na_pos(request,pk):
     if formset.is_valid():
       formset.save()
       string = ""
-      for i in range(len(formset.cleaned_data[id])):
-        string = string + "https://ap-express.vercel.app/Position/" + str(formset.cleaned_data[id][i]) + "\n"
+      for i in range(len(formset.values('id')):
+        string = string + "https://ap-express.vercel.app/Position/" + str(formset.values('id')[i]) + "\n"
       send_mail(
         "Neuer Auftrag " + pk + ", Auftragsfirma:" +auftrag.auftragsfirma.firma,
         "Es ist ein neuer Auftrag zu erledigen. \n" + string,
