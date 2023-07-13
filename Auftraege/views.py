@@ -125,9 +125,10 @@ def ua10na_pos(request,pk):
       formset.save()
       send_mail(
         "Neuer Auftrag " + pk + ", Auftragsfirma:" +auftrag.auftragsfirma.firma,
-        "Es ist ein neuer Auftrag zu erledigen.",
+        "Es ist ein neuer Auftrag zu erledigen. \n" + "https://ap-express.vercel.app",
         'settings.EMAIL_HOST_USER',
-        ['alipalabiyik1@outlook.de'],
+        ['janni24616@gmail.com'],
+    #    ['alipalabiyik1@outlook.de'],
         fail_silently=False)
       return redirect("/main")
   context={'formset':formset}
