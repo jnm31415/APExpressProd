@@ -123,15 +123,11 @@ def ua10na_pos(request,pk):
     formset = position(request.POST, instance=auftrag)
     if formset.is_valid():
       formset.save()
-      string = ""
-      for i in range(len(formset.values('id')):
-        string = string + "https://ap-express.vercel.app/Position/" + str(formset.values('id')[i]) + "\n"
       send_mail(
         "Neuer Auftrag " + pk + ", Auftragsfirma:" +auftrag.auftragsfirma.firma,
-        "Es ist ein neuer Auftrag zu erledigen. \n" + string,
+        "Es ist ein neuer Auftrag zu erledigen. \n",
         'settings.EMAIL_HOST_USER',
-        ['janni24616@gmail.com'],
-    #    ['alipalabiyik1@outlook.de'],
+        ['alipalabiyik1@outlook.de'],
         fail_silently=False)
       return redirect("/main")
   context={'formset':formset}
