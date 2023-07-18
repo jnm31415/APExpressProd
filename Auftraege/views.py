@@ -269,11 +269,12 @@ def invoice(request,pk):
         canvas.drawString(13.8*cm,20.6*cm,'Rechnungsdatum: ')
         canvas.drawString(13.8*cm,20.2*cm,'Kundennummer: ')
         canvas.drawString(13.8*cm,19.8*cm,'Auftragsnummer: ')
+        canvas.drawString(13.8*cm,19.4*cm,'Auftragsdatum: ')
         canvas.drawRightString(19.1*cm,21*cm, rg.rechnungsnummer)
         canvas.drawRightString(19.1*cm,20.6*cm, str(rg.rechnungsdatum))
         canvas.drawRightString(19.1*cm,20.2*cm,f"{int(a.auftragsfirma.id):04d}")
         canvas.drawRightString(19.1*cm,19.8*cm,a.auftragsnummer_ID)
-
+        canvas.drawRightString(19.1*cm,19.4*cm,a.auftragsdatum)
         canvas.drawString(1.7*cm,23.7*cm,rg.empfänger.firma)
         canvas.drawString(1.7*cm,23.3*cm,rg.empfänger.adresse)
         canvas.drawString(1.7*cm,22.9*cm,str(rg.empfänger.plz)+ " " + rg.empfänger.ort)
