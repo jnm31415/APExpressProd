@@ -51,7 +51,7 @@
                 </tr>
                 <tr>
                 {% for j in all_pos %}
-                    <td><a href="{% url 'ua10naedit' j.auftragsnummer %}">{{j.auftragsnummer}}</a><br><a href="{% url 'POD' j.auftragsnummer %}">{{j.auftragsnummer}}</a></td>
+                    <td><a href="{% url 'ua10naedit' j.auftragsnummer %}">{{j.auftragsnummer}}</a><br><a href="{% url 'pod' j.auftragsnummer %}">{{j.auftragsnummer}}</a></td>
                     <td>{{j.von.firma}}</td>
                     <td>{{j.nach.firma}}</td>
                     <td>{{j.kostenstelle}}</td>
