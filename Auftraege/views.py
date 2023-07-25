@@ -168,7 +168,7 @@ def ua21ra(request):
   context = {'all_rg':all_rg, 'all_pos':all_pos}
   return render(request, 'Auftraege/UA21RA.html', context)
 
-@login_required(login_url='login')
+#@login_required(login_url='login')
 def position(request,pk):
   position = Auftragspositionen.objects.get(id=pk)
   form = Position(request.POST or None, instance=position)
