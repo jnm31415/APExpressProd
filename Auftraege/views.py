@@ -27,7 +27,7 @@ import time
 from django.templatetags.static import static
 from django.core.mail import send_mail
 from django.conf import settings
-from django.core.paginator import paginator 
+
 
 #dd
 
