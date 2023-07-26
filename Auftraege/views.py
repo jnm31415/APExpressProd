@@ -27,6 +27,8 @@ import time
 from django.templatetags.static import static
 from django.core.mail import send_mail
 from django.conf import settings
+from django.core.paginator import paginator 
+
 #dd
 
 
@@ -137,7 +139,11 @@ def ua10na_pos(request,pk):
 @login_required(login_url='login')
 def ua11aa(request):
   all_auf = Auftrag.objects.order_by('-auftragsnummer_ID')
-  context = {'all_auf':all_auf}
+  paginator = Paginator(all_auf, 20)
+
+  page_number = request.GET.get("page")
+  page_obj = paginator.get_page(page_number)
+  context = {'page_obj':page_obj}
   return render(request, 'Auftraege/UA11AA.html', context)
 
 @login_required(login_url='login')
