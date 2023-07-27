@@ -89,7 +89,7 @@ class Auftragspositionen(models.Model):
     position_abgeschlossen = models.BooleanField( blank=True,null=True)
     unterschrift = models.TextField(blank=True, null=True, default="-")
     unterschrift_datum = models.DateField(blank=True, null=True)
-    empfänger = models.CharField(max_length=120,blank=True, null=True,default='-')
+    empfänger = models.CharField(max_length=120,blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add = True, blank = True, null=True)
     date_modified = models.DateTimeField(auto_now = True, blank = True, null=True)
 
