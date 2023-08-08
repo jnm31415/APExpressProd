@@ -152,7 +152,7 @@ def ua12as(request):
 
 @login_required(login_url='login')
 def ua20nr(request):
-  form = UA20NRForm(initial={'rechnungsnummer':calc_rechnungsnummer(),'rechnungsdatum':date.today(),'rechnungstext':'Bitte überweisen Sie den ausstehenden Betrag innerhalb von 7 Tagen auf das unten genannte Konto.'})
+  form = UA20NRForm(initial={'rechnungsnummer':calc_rechnungsnummer(),'rechnungsdatum':date.today(),'rechnungstext':'Bitte überweisen Sie den ausstehenden Betrag innerhalb von 7 Tagen auf das unten genannte Konto. \n Hinweis: Die Einzelpreise für die Touren wurden an die gestiegenen Kraftstoffpreise angepasst.'})
   if request.method == "POST":
     form = UA20NRForm(request.POST)
     if form.is_valid():
