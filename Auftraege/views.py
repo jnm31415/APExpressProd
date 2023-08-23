@@ -501,4 +501,169 @@ class NumberedCanvas(canvas.Canvas):
                              "Seite %d von %d" % (self._pageNumber, page_count))
 
 
+def storno(request,pk):
+  a = Auftrag.objects.get(auftragsnummer_ID = pk)
+  pos = Auftragspositionen.objects.filter(auftragsnummer=pk)
+  rg = Rechnung.objects.get(auftragsnummer=pk)
+
+  def pagenumber(canvas,doc):
+    pagenum = canvas.getPageNumber()
+    text = "Seite %s von %s" % (pagenum,doc.page)
+    canvas.drawRightString(20*cm,2*cm,text)
+
+  def generate_pdf(request):
+      response = HttpResponse(content_type='application/pdf')
+      response['Content-Disposition'] = 'filename="AP_Rechnung"' + rg.rechnungsnummer + "_" + str(rg.rechnungsdatum) + ".pdf"
+
+      doc = SimpleDocTemplate(response, pagesize=A4,rightMargin=2*cm, leftMargin=2*cm, topMargin=1*cm, bottomMargin=2.5*cm, title="Rechnung")
+      Title = 'Test'
+      elements = []
+      data = [['Pos', 'Beschreibung','Anzahl', 'Preis [€]', 'MwSt. [%]', 'Total [€]','Referenz']]
+      invoice_data = []
+      total_price = 0
+      mw=0
+      styles1 = getSampleStyleSheet()
+      style1 = styles1["Normal"]
+      style1.fontSize = 10
+      style1.alignment = 1
+      styles3 = getSampleStyleSheet()
+      style3 = styles1["Normal"]
+      style3.fontSize = 8
+      style3.alignment = 1
+      #Creating data for table
+
+
+    
+      for i in range(len(pos.values('id'))):
+        v = Adressen.objects.get(id = pos.values('von')[i]['von'])
+        n = Adressen.objects.get(id = pos.values('nach')[i]['nach'])
+        #
+        invoice_data += [{'pos': i+1, \
+                          'beschreibung': 'Transport mit ' + pos.values('fahrzeuge')[i]['fahrzeuge'] + '\n' + '(Wartezeit: ' + str(pos.values('wartezeit')[i]['wartezeit']) + 'min' + ' , Fixpreis: ' + '{0:.{1}f}'.format(round(pos.values('pauschale')[i]['pauschale'],2), 2) + '€)\n' + 'Von: ' + v.firma + '\n' + 'Nach: ' + n.firma + '\n' + 'Kostenstelle: ' + pos.values('kostenstelle')[i]['kostenstelle'], \
+                          'anzahl': pos.values('anzahl')[i]['anzahl'], \
+                          'preis': '{0:.{1}f}'.format(float(round(pos.values('einzelpreis')[i]['einzelpreis'],2)), 2), \
+                          'mwst': '{0:.{1}f}'.format(round(pos.values('mwst')[i]['mwst'],2),2), \
+                          'total':'{0:.{1}f}'.format(round(pos.values('anzahl')[i]['anzahl']*pos.values('einzelpreis')[i]['einzelpreis']+pos.values('anzahl')[i]['anzahl']*pos.values('einzelpreis')[i]['einzelpreis']/100*pos.values('mwst')[i]['mwst']+pos.values('pauschale')[i]['pauschale']+pos.values('pauschale')[i]['pauschale']/100*pos.values('mwst')[i]['mwst'],2),2) , \
+                          'referenz':pos.values('referenz')[i]['referenz'] \
+                         }]
+        mw += float(invoice_data[i]['total'])-float(round(pos.values('einzelpreis')[i]['einzelpreis'],2))*float(pos.values('anzahl')[i]['anzahl'])-pos.values('pauschale')[i]['pauschale']
+        total_price += float(invoice_data[i]['total'])
+        #mw = mw + round(float(invoice_data[i]['preis'])*float(invoice_data[i]['anzahl'])/100*float(invoice_data[i]['mwst']),2)
+        
+      for item in invoice_data:
+          data.append([item['pos'], item['beschreibung'],int(item['anzahl']), item['preis'], item['mwst'], item['total'],Paragraph(item['referenz'],style1)])
+
+      #Build the table 
+      t=Table(data,colWidths=[0.8*cm,6.5*cm,1.1*cm,2.4*cm,1.8*cm,2*cm,3*cm])
+      t.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,0),colors.lightgrey),
+                            ('TEXTCOLOR',(0,0),(-1,0),colors.black),
+                            ('ALIGN',(0,0),(-1,-1),'CENTER'),
+                            ('ALIGN',(1,1),(1,-1),'LEFT'),
+                            ('VALIGN',(0,0),(-1,-1),'MIDDLE'),
+                            ('FONTNAME',(0,0),(-1,0),'Helvetica-Bold'),
+                            ('FONTSIZE',(0,0),(-1,-1),8),
+                            ('BOTTOMPADDING',(0,0),(-1,0),0),
+                            ('BACKGROUND',(0,1),(-1,-1),colors.beige),
+                            ('GRID',(0,0),(-1,-1),1,colors.black)]))
+      
+
+      rtext = Paragraph(rg.rechnungstext)
+      im = Image('/var/task/staticfiles_build/static/LogoAP.jpg',4*cm,2*cm,hAlign='RIGHT')
+      def myFirstPage(canvas, doc):
+        #Draws the invoice header
+        canvas.setStrokeColorRGB(0.13, 0.25, 0.27)
+        canvas.setFillColorRGB(0.2, 0.2, 0.2)
+        canvas.setFont('Helvetica-Bold', 16)
+        canvas.drawString(1.7 * cm, 19 * cm, 'Rechnung')
+        canvas.setFont('Helvetica', 6)
+        canvas.drawString(13.8*cm,21.4*cm,'*Bitte bei Schrift- und Zahlungsverkehr angeben*')
+        canvas.setFont('Helvetica', 10)
+        canvas.drawString(13.8*cm,21*cm,'Rechnungsnummer: ')
+        canvas.drawString(13.8*cm,20.6*cm,'Rechnungsdatum: ')
+        canvas.drawString(13.8*cm,20.2*cm,'Kundennummer: ')
+        canvas.drawString(13.8*cm,19.8*cm,'Auftragsnummer: ')
+        canvas.drawString(13.8*cm,19.4*cm,'Auftragsdatum: ')
+        canvas.drawRightString(19.1*cm,21*cm, rg.rechnungsnummer)
+        canvas.drawRightString(19.1*cm,20.6*cm, str(rg.rechnungsdatum))
+        canvas.drawRightString(19.1*cm,20.2*cm,f"{int(a.auftragsfirma.id):04d}")
+        canvas.drawRightString(19.1*cm,19.8*cm,a.auftragsnummer_ID)
+        canvas.drawRightString(19.1*cm,19.4*cm,str(a.auftragsdatum))
+        
+        canvas.drawString(1.7*cm,23.7*cm,rg.empfänger.firma)
+        canvas.drawString(1.7*cm,23.3*cm,rg.empfänger.adresse)
+        canvas.drawString(1.7*cm,22.9*cm,str(rg.empfänger.plz)+ " " + rg.empfänger.ort)
+        canvas.drawString(1.7*cm,22.5*cm,rg.empfänger.land)
+        canvas.drawString(1.7*cm,22.1*cm,rg.empfänger.contact)
+        canvas.setFont('Helvetica', 7)
+        canvas.drawString(1.7*cm,24.05*cm,'Ali Palabiyik * Jevenstedter Straße 175 * 22547 Hamburg')
+
+        canvas.setFont('Helvetica', 10)
+        canvas.drawString(1.7*cm,18*cm,'Sehr geehrte Damen und Herren,')
+        canvas.drawString(1.7*cm,17.6*cm,'ich bedanke mich für Ihren Auftrag und erlaube mir, die folgenden Leistungen in Rechnung zu stellen.')
+
+        canvas.setLineWidth(1)
+        canvas.line(0*cm,1.6*cm,21.7*cm,1.6*cm)
+        canvas.saveState()
+        #pagenumber(canvas,doc)
+
+        
+        styles = getSampleStyleSheet()
+        data = [['Ali Palabiyik Logistik Express','Tel.: 0176/7022 1652','Targo Bank'],
+                ['Inh. Ali Palabiyik','E-Mail: Alipalabiyik1@outlook.de','IBAN: DE60300209005380642927'],
+                ['Jevenstedterstraße 175','','Kto.-Inh.: Ali Palabiyik'],
+                ['22547 Hamburg','','Steuer-Nr.:41/178/01662 FA Hamburg']]
+        table = Table(data,colWidths=[6*cm,6*cm,6*cm], rowHeights=[0.3*cm,0.3*cm,0.3*cm,0.3*cm])
+        table.hAlign = 'CENTER'
+        table.setStyle([('ALIGN', (0, 0),(-1, -1), 'LEFT'),
+                        ('FONTSIZE',(0,0),(-1,-1),6), 
+                        ('VALIGN',(0,0),(-1,-1),'BOTTOM')])
+        
+        w, h = table.wrap(doc.width, doc.bottomMargin)
+        table.drawOn(canvas, doc.leftMargin+0.5*cm,h-1.2*cm)
+        
+      data2 = [['Gesamtpreis:','{0:.{1}f}'.format(total_price,2)+"€"],['inkl. MwSt:','{0:.{1}f}'.format(round(mw,2),2)+'€']]
+      table2 = Table(data2)
+      table2.hAlign = 'RIGHT'
+      table2.setStyle([('ALIGN', (0, 0),(0, -1), 'LEFT'),
+                       ('ALIGN', (0, 1),(1, -1), 'RIGHT'),
+                       ('FONTNAME',(0,0),(1,0),'Helvetica-Bold'),
+                      ('FONTSIZE',(0,0),(-1,-1),10), 
+                      ('VALIGN',(0,0),(-1,-1),'MIDDLE')])
+      
+      def second(canvas,doc):
+        styles4 = getSampleStyleSheet()
+        style4 = styles4["Normal"]
+        style4.fontSize = 10
+        canvas.setLineWidth(1)
+        canvas.line(0*cm,1.6*cm,21.7*cm,1.6*cm)
+        canvas.saveState()
+        data = [['Ali Palabiyik Logistik Express','Tel.: 0176/7022 1652','Targo Bank'],
+                ['Inh. Ali Palabiyik','E-Mail: Alipalabiyik1@outlook.de','IBAN: DE60300209005380642927'],
+                ['Jevenstedterstraße 175','','Kto.-Inh.: Ali Palabiyik'],
+                ['22547 Hamburg','','Steuer-Nr.:41/178/01662 FA Hamburg']]
+        table = Table(data,colWidths=[6*cm,6*cm,6*cm], rowHeights=[0.3*cm,0.3*cm,0.3*cm,0.3*cm])
+        table.hAlign = 'CENTER'
+        table.setStyle([('ALIGN', (0, 0),(-1, -1), 'LEFT'),
+                        ('FONTSIZE',(0,0),(-1,-1),6), 
+                        ('VALIGN',(0,0),(-1,-1),'BOTTOM')])
+        
+        w, h = table.wrap(doc.width, doc.bottomMargin)
+        table.drawOn(canvas, doc.leftMargin+0.5*cm,h-1.2*cm)
+        canvas.setFont('Helvetica',10)
+        #pagenumber(canvas,doc)
+       
+      elements.append(im)
+      elements.append(Spacer(21.7*cm,9.3*cm))
+      elements.append(t)
+      elements.append(Spacer(21.7*cm,0.5*cm))
+      elements.append(table2)
+      elements.append(Spacer(21.7*cm,0.5*cm))
+      elements.append(rtext)
+      doc.build(elements,onFirstPage=myFirstPage,onLaterPages=second,canvasmaker=NumberedCanvas)
+
+      return response
+  return generate_pdf(request)
+
+
+
 
