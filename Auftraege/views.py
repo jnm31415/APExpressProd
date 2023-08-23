@@ -574,15 +574,17 @@ def storno(request,pk):
         canvas.setStrokeColorRGB(0.13, 0.25, 0.27)
         canvas.setFillColorRGB(0.2, 0.2, 0.2)
         canvas.setFont('Helvetica-Bold', 16)
-        canvas.drawString(1.7 * cm, 19 * cm, 'Rechnung')
+        canvas.drawString(1.7 * cm, 19 * cm, 'Stornorechnung')
         canvas.setFont('Helvetica', 6)
         canvas.drawString(13.8*cm,21.4*cm,'*Bitte bei Schrift- und Zahlungsverkehr angeben*')
         canvas.setFont('Helvetica', 10)
-        canvas.drawString(13.8*cm,21*cm,'Rechnungsnummer: ')
+        canvas.drawString(13.8*cm,21.4*cm,'Gutschrift: ')
+        canvas.drawString(13.8*cm,21*cm,'Ref. Rechnungsnummer: ')
         canvas.drawString(13.8*cm,20.6*cm,'Rechnungsdatum: ')
         canvas.drawString(13.8*cm,20.2*cm,'Kundennummer: ')
         canvas.drawString(13.8*cm,19.8*cm,'Auftragsnummer: ')
         canvas.drawString(13.8*cm,19.4*cm,'Auftragsdatum: ')
+        canvas.drawRightString(19.1*cm,21.4*cm, rg.rechnungsnummer.replace("RG","GS"))
         canvas.drawRightString(19.1*cm,21*cm, rg.rechnungsnummer)
         canvas.drawRightString(19.1*cm,20.6*cm, str(rg.rechnungsdatum))
         canvas.drawRightString(19.1*cm,20.2*cm,f"{int(a.auftragsfirma.id):04d}")
@@ -599,7 +601,7 @@ def storno(request,pk):
 
         canvas.setFont('Helvetica', 10)
         canvas.drawString(1.7*cm,18*cm,'Sehr geehrte Damen und Herren,')
-        canvas.drawString(1.7*cm,17.6*cm,'ich bedanke mich für Ihren Auftrag und erlaube mir, die folgenden Leistungen in Rechnung zu stellen.')
+        canvas.drawString(1.7*cm,17.6*cm,'vereinbarungsgemäß erhalten Sie hiermit eine Gutschrift zu der oben genannten Rechnungsnummer.')
 
         canvas.setLineWidth(1)
         canvas.line(0*cm,1.6*cm,21.7*cm,1.6*cm)
@@ -657,8 +659,6 @@ def storno(request,pk):
       elements.append(t)
       elements.append(Spacer(21.7*cm,0.5*cm))
       elements.append(table2)
-      elements.append(Spacer(21.7*cm,0.5*cm))
-      elements.append(rtext)
       doc.build(elements,onFirstPage=myFirstPage,onLaterPages=second,canvasmaker=NumberedCanvas)
 
       return response
