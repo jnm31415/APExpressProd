@@ -513,7 +513,7 @@ def storno(request,pk):
 
   def generate_pdf(request):
       response = HttpResponse(content_type='application/pdf')
-      response['Content-Disposition'] = 'filename="AP_Rechnung"' + rg.rechnungsnummer + "_" + str(rg.rechnungsdatum) + ".pdf"
+      response['Content-Disposition'] = 'filename="AP_Stornorechnung"' + rg.rechnungsnummer + "_" + str(rg.rechnungsdatum) + ".pdf"
 
       doc = SimpleDocTemplate(response, pagesize=A4,rightMargin=2*cm, leftMargin=2*cm, topMargin=1*cm, bottomMargin=2.5*cm, title="Rechnung")
       Title = 'Test'
