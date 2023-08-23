@@ -33,7 +33,8 @@
                 <div class="accordion-body">
                     Rechnungsempfänger: {{i.empfänger}}<br>
                     Auftragsnummer: <a href="{% url 'ua10naedit' i.auftragsnummer %}">{{i.auftragsnummer}}</a><br>
-                    <a href="{% url 'invoice' i.auftragsnummer %}">Rechnung anzeigen</a>
+                    <a href="{% url 'invoice' i.auftragsnummer %}">Rechnung anzeigen</a><br>
+                    <a href="{% url 'storno' i.auftragsnummer %}">Stornorechnung anzeigen</a><br>
                     <div>
                         <table class="table table-striped">
                             <tr>
