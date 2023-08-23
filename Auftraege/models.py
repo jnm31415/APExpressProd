@@ -109,7 +109,7 @@ class Auftragspositionen(models.Model):
 class Rechnung(models.Model):
     auftragsnummer = models.ForeignKey(Auftrag,on_delete=models.PROTECT)
     empfänger = models.ForeignKey(Rechnungsempfaenger,on_delete=models.PROTECT, blank=False)
-    rechnungsnummer = models.CharField(blank=False,max_length=7)
+    rechnungsnummer = models.CharField(blank=False,max_length=10)
     rechnungsdatum = models.DateField(blank=False)
     rechnungstext = models.TextField(blank=True)
     rechnungspreis = models.FloatField(blank=True,null=True)
