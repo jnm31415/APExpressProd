@@ -18,4 +18,5 @@ urlpatterns = [
     path('UA21RA', views.ua21ra,name='ua21ra'),
     path('Invoice/<str:pk>', views.invoice, name='invoice'),
     path('POD/<str:pk>', views.pod, name='pod'),
+    path('Stornoinvoice/<str:pk>', views.storno, name='storno'),
 ]
