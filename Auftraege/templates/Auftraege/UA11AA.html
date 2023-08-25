@@ -54,7 +54,7 @@
                                 <th>Referenz</th>
                                 <th>Abgeschl.</th>
                             </tr>
-                            {% for j in i.auftragspositionen_set.all %}
+                            {% for j in i.auftragspositionen_set.all|dictsort:"id" %}
                             <tr>
                                 <td><a href="{% url 'position' j.id %}">{{j.id}}</a></td>
                                 <td>{{j.von.firma}}</td>
