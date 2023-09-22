@@ -171,7 +171,10 @@ def ua20nr(request):
 def ua21ra(request):
   all_rg = Rechnung.objects.order_by('-rechnungsnummer')
   all_pos = Auftragspositionen.objects.all()
-  context = {'all_rg':all_rg, 'all_pos':all_pos}
+  p = Paginator(Rechnung.objects.order_by('-rechnungsnummer'),25) 
+  page = request.GET.get('page')
+  all = p.get_page(page)
+  context = {'all_rg':all_rg, 'all_pos':all_pos, 'all':all}
   return render(request, 'Auftraege/UA21RA.html', context)
 
 @login_required(login_url='login')
