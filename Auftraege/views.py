@@ -151,7 +151,10 @@ def ua12as(request):
   all_pos = Auftragspositionen.objects.order_by('-auftragsnummer')
   myFilter1 = SearchPosition(request.GET,queryset=all_pos)
   all_pos = myFilter1.qs
-  context = {'all_pos':all_pos, 'myFilter1':myFilter1}
+  p = Paginator(all_pos,25)
+  page = request.GET.get('page')
+  all = p.get_page(page)
+  context = {'all_pos':all_pos, 'myFilter1':myFilter1, 'all':all}
   return render(request, 'Auftraege/UA12AS.html', context)
 
 @login_required(login_url='login')
