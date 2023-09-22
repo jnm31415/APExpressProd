@@ -148,7 +148,7 @@ def ua11aa(request):
 
 @login_required(login_url='login')
 def ua12as(request):
-  all_pos = Auftragspositionen.objects.order_by('-auftragsnummer')
+  all_pos = Auftragspositionen.objects.filter(unterschrift_datum = date.today().order_by('-auftragsnummer')
   myFilter1 = SearchPosition(request.GET,queryset=all_pos)
   all_pos = myFilter1.qs
   context = {'all_pos':all_pos, 'myFilter1':myFilter1}
