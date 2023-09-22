@@ -81,7 +81,20 @@
             <h5>Es gibt aktuell keine Aufträge...</h5>
         </div>
         {% endfor %}
-            {{all}}
+        <br/>
+        {% if all.has_previous %}
+            <a href="?page=1">&laquo First</a>
+            <a href="?page={{ all.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        Page {{ all.number }} of {{ all.paginator.num_pages }}
+            
+        {% if all.has_next %}
+            <a href="?page={{ all.next_page_number }}">Next</a>
+            <a href="?page={{ all.paginator.num_pages }}">&raquo Last</a>
+        {% endif %}
+
+        
     </body>
 </html>
 {% endblock %}
