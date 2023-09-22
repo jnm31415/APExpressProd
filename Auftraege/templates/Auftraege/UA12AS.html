@@ -58,19 +58,13 @@
                     <td>{{j.referenz}}</td>
                     <td>{{j.empfänger}}</td>
                     <td>{{j.unterschrift_datum}}</td>
-                    <th><button id = "sign" style="display:flex;justify-content: center;" class="btn btn-link" type="submit">sign</button></th>
+                    <td><img src="{{j.unterschrift}}" width="100px" height="50px"></td>
                     
                 </tr>
                 {% endfor %}
             </table>
         </div>
         
-<script>
-        document.getElementById("sign").addEventListener('click', function(){
-        var w = window.open("about:blank")
-        w.document.body.appendChild(w.document.createElement('iframe')).src = document.getElementById("id_unterschrift").value;
-        w.document.body.style.margin = 0;
-</script>
     </body>
 </html>
 {% endblock %}
