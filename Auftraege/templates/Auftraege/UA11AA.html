@@ -86,14 +86,14 @@
   <ul class="pagination justify-content-center">
         {% if all.has_previous %}
             <li class="page-item disabled"><a href="?page=1">&laquo First</a></li>
-             <li class="page-item"><a class="page-link" href="#"><a href="?page={{ all.previous_page_number }}">Previous</a></li>
+             <li class="page-item"><a class="page-link" href="?page={{ all.previous_page_number }}">Previous</a></li>
         {% endif %}
 
         <li class="page-item"><a class="page-link" href="#">Page {{ all.number }} of {{ all.paginator.num_pages }}</li>
             
         {% if all.has_next %}
-            <li class="page-item"><a class="page-link" href="#"><a href="?page={{ all.next_page_number }}">Next</a></li>
-            <li class="page-item"><a class="page-link" href="#"><a href="?page={{ all.paginator.num_pages }}">&raquo Last</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ all.next_page_number }}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ all.paginator.num_pages }}"></li>
         {% endif %}
   </ul>
 </nav>
