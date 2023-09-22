@@ -3,6 +3,7 @@ from .models import *
 from .forms import *
 from django import forms
 from django_filters import CharFilter,ModelChoiceFilter,DateFilter
+from datetime import date
 
 class SearchPosition(django_filters.FilterSet):
 
@@ -12,7 +13,7 @@ class SearchPosition(django_filters.FilterSet):
     kostenstelle = CharFilter(field_name="kostenstelle", lookup_expr='icontains', widget=forms.TextInput(attrs={'class':'form-control form-control-sm'}))
     referenz = CharFilter(field_name="referenz", lookup_expr='icontains', widget=forms.TextInput(attrs={'class':'form-control form-control-sm'}))
     empfänger = CharFilter(field_name="empfänger", lookup_expr='icontains', widget=forms.TextInput(attrs={'class':'form-control form-control-sm'}))
-    unterschrift_datum = DateFilter(field_name='unterschrift_datum',widget=forms.TextInput(attrs={'class':'form-control form-control-sm','type':'date'}))
+    unterschrift_datum = DateFilter(field_name='unterschrift_datum', default=date.today, widget=forms.TextInput(attrs={'class':'form-control form-control-sm','type':'date'}))
     "start_date = DateFilter(field_name='unterschrift_datum',lookup_expr=('lt'),widget=forms.TextInput(attrs={'class':'form-control form-control-sm','type':'date'}))"
     "end_date = DateFilter(field_name='unterschrift_datum',lookup_expr=('gt'),widget=forms.TextInput(attrs={'class':'form-control form-control-sm', 'type':'date'}))"
     class Meta: 
