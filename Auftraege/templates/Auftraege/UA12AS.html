@@ -68,7 +68,7 @@
   <ul class="pagination justify-content-center">
         {% load my_tags %}
 
-        {% if is_paginated %}
+        {% if all.is_paginated %}
           {% if all.has_previous %}
              <li class="page-item"><a class="page-link" href="?{% param_replace page=1 %}">First</a></li>
             {% if all.previous_page_number != 1 %}
