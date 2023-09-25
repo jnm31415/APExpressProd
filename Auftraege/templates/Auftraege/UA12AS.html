@@ -66,16 +66,24 @@
         </div>
 <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
-        {% if all.has_previous %}
-            <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{ all.previous_page_number }}">Previous</a></li>
-        {% endif %}
+        {% load my_tags %}
 
-        <li class="page-item disabled"><a class="page-link" href="#">Page {{ all.number }} of {{ all.paginator.num_pages }}</a></li>
-            
-        {% if all.has_next %}
-            <li class="page-item"><a class="page-link" href="?page={{ all.next_page_number }}">Next</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{ all.paginator.num_pages }}">Last</a></li>
+        {% if is_paginated %}
+          {% if all.has_previous %}
+             <li class="page-item"><a class="page-link" href="?{% param_replace page=1 %}">First</a></li>
+            {% if all.previous_page_number != 1 %}
+             <li class="page-item"><a class="page-link" href="?{% param_replace page=all.previous_page_number %}">Previous</a></li>
+            {% endif %}
+          {% endif %}
+        
+          <li class="page-item disabled"><a class="page-link" href="#">Page {{ all.number }} of {{ all.paginator.num_pages }}</a></li>
+        
+          {% if all.has_next %}
+            {% if all.next_page_number != paginator.num_pages %}
+              <li class="page-item"><a class="page-link" href="?{% param_replace page=all.next_page_number %}">Next</a></li>
+            {% endif %}
+            <li class="page-item"><a class="page-link" href="?{% param_replace page=paginator.num_pages %}">Last</a></li>
+          {% endif %}
         {% endif %}
   </ul>
 </nav>
