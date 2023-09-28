@@ -119,7 +119,7 @@ def ua10naedit(request,pk):
 
 @login_required(login_url='login')
 def ua10na_pos(request,pk):
-  position = inlineformset_factory(Auftrag,Auftragspositionen,fields=['id','von','nach','referenz','kostenstelle'],extra=12,widgets={'id':forms.TextInput(attrs={'class':'form-control','readonly':'readonly'}),'von':forms.Select(attrs={'class':'form-select'}),'nach':forms.Select(attrs={'class':'form-select'}),'kostenstelle':forms.TextInput(attrs={'class':'form-control'}),'referenz':forms.Textarea(attrs={'class':'form-control','rows':1})})
+  position = inlineformset_factory(Auftrag,Auftragspositionen,fields=['id','von','nach','fahrzeuge','referenz','kostenstelle'],extra=12,widgets={'id':forms.TextInput(attrs={'class':'form-control','readonly':'readonly'}),'von':forms.Select(attrs={'class':'form-select'}),'nach':forms.Select(attrs={'class':'form-select'}),'fahrzeuge':forms.Select(attrs={'class':'form-select'}),'kostenstelle':forms.TextInput(attrs={'class':'form-control'}),'referenz':forms.Textarea(attrs={'class':'form-control','rows':1})})
   auftrag = Auftrag.objects.get(auftragsnummer_ID=pk)
   formset = position(instance=auftrag)
   if request.method == "POST":
