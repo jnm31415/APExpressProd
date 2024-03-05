@@ -238,7 +238,7 @@ def invoice(request,pk):
         n = Adressen.objects.get(id = pos.values('nach')[i]['nach'])
         #
         invoice_data += [{'pos': i+1, \
-                          'beschreibung': 'Transport mit ' + pos.values('fahrzeuge')[i]['fahrzeuge'] + '\n' + '(Wartezeit: ' + str(pos.values('wartezeit')[i]['wartezeit']) + 'min' + ' , Fixpreis: ' + '{0:.{1}f}'.format(round(pos.values('pauschale')[i]['pauschale'],2), 2) + '€)\n' + 'Von: ' + v.firma + '\n' + 'Nach: ' + n.firma + '\n' + 'Kostenstelle: ' + pos.values('kostenstelle')[i]['kostenstelle'], \
+                          'beschreibung': 'Transport mit ' + pos.values('fahrzeuge')[i]['fahrzeuge'] + '\n' + '(Wartezeit: ' + str(pos.values('wartezeit')[i]['wartezeit']) + 'min' + ' , inkl. Fixpreis: ' + '{0:.{1}f}'.format(round(pos.values('pauschale')[i]['pauschale'],2), 2) + '€)\n' + 'Von: ' + v.firma + '\n' + 'Nach: ' + n.firma + '\n' + 'Kostenstelle: ' + pos.values('kostenstelle')[i]['kostenstelle'], \
                           'anzahl': pos.values('anzahl')[i]['anzahl'], \
                           'preis': '{0:.{1}f}'.format(float(round(pos.values('einzelpreis')[i]['einzelpreis']+pos.values('pauschale')[i]['pauschale'],2)), 2), \
                           'mwst': '{0:.{1}f}'.format(round(pos.values('mwst')[i]['mwst'],2),2), \
