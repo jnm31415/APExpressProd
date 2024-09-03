@@ -336,10 +336,10 @@ def invoice(request,pk):
         canvas.setLineWidth(1)
         canvas.line(0*cm,1.6*cm,21.7*cm,1.6*cm)
         canvas.saveState()
-        data = [['Ali Palabiyik Logistik Express','Tel.: 0176/7022 1652','Targo Bank'],
-                ['Inh. Ali Palabiyik','E-Mail: Alipalabiyik1@outlook.de','IBAN: DE60300209005380642927'],
-                ['Jevenstedterstraße 175','','Kto.-Inh.: Ali Palabiyik'],
-                ['22547 Hamburg','','Steuer-Nr.:41/178/01662 FA Hamburg']]
+        data = [['Melo GmbH','Tel.: 01577/911 29 90','HypoVereinsbank'],
+                ['Inh. Haydar Buldak','E-Mail: B.Logistik@web.de','IBAN: DE91700202700042877450'],
+                ['Liebigstraße 2-20','','Kto.-Inh.: Haydar Buldak'],
+                ['22113 Hamburg','','Steuer-Nr.:46/742/04073 FA Hamburg']]
         table = Table(data,colWidths=[6*cm,6*cm,6*cm], rowHeights=[0.3*cm,0.3*cm,0.3*cm,0.3*cm])
         table.hAlign = 'CENTER'
         table.setStyle([('ALIGN', (0, 0),(-1, -1), 'LEFT'),
@@ -430,7 +430,7 @@ def pod(request,pk):
         canvas.drawString(1.7*cm,22.5*cm,a.auftragsfirma.land)
         canvas.drawString(1.7*cm,22.1*cm,a.auftragsfirma.contact)
         canvas.setFont('Helvetica', 7)
-        canvas.drawString(1.7*cm,24.05*cm,'Ali Palabiyik * Jevenstedter Straße 175 * 22547 Hamburg')
+        canvas.drawString(1.7*cm,24.05*cm,'Haydar Buldak * Liebigstraße 2 - 20 * 22113 Hamburg')
 
         canvas.setLineWidth(1)
         canvas.line(0*cm,1.6*cm,21.7*cm,1.6*cm)
@@ -459,10 +459,10 @@ def pod(request,pk):
         canvas.setLineWidth(1)
         canvas.line(0*cm,1.6*cm,21.7*cm,1.6*cm)
         canvas.saveState()
-        data = [['Ali Palabiyik Logistik Express','Tel.: 0176/7022 1652','Targo Bank'],
-                ['Inh. Ali Palabiyik','E-Mail: Alipalabiyik1@outlook.de','IBAN: DE60300209005380642927'],
-                ['Jevenstedterstraße 175','','Kto.-Inh.: Ali Palabiyik'],
-                ['22547 Hamburg','','Steuer-Nr.:41/178/01662 FA Hamburg']]
+        data = [['Melo GmbH','Tel.: 01577/911 29 90','HypoVereinsbank'],
+                ['Inh. Haydar Buldak','E-Mail: B.Logistik@web.de','IBAN: DE91700202700042877450'],
+                ['Liebigstraße 2-20','','Kto.-Inh.: Haydar Buldak'],
+                ['22113 Hamburg','','Steuer-Nr.:46/742/04073 FA Hamburg']]
         table = Table(data,colWidths=[6*cm,6*cm,6*cm], rowHeights=[0.3*cm,0.3*cm,0.3*cm,0.3*cm])
         table.hAlign = 'CENTER'
         table.setStyle([('ALIGN', (0, 0),(-1, -1), 'LEFT'),
@@ -471,7 +471,7 @@ def pod(request,pk):
         
         w, h = table.wrap(doc.width, doc.bottomMargin)
         table.drawOn(canvas, doc.leftMargin+0.5*cm,h-1.2*cm)
-      par = Paragraph('Sehr geehrte Damen und Herren, <br /> folgende Auftragspositionen wurden von der Firma "Ali Palabiyik Express Logistik" ausgeführt. Die ausgezeichneten Unterschriften wurden elektronisch aufgezeichnet und gelten als Bestätigung der Ablieferung. Dieser Abliefernachweis wurde mittels EDV automatisch erstellt und besitzt auch ohne Unterschrift seine Gültigkeit.') 
+      par = Paragraph('Sehr geehrte Damen und Herren, <br /> folgende Auftragspositionen wurden von der Firma "Melo GmbH" ausgeführt. Die ausgezeichneten Unterschriften wurden elektronisch aufgezeichnet und gelten als Bestätigung der Ablieferung. Dieser Abliefernachweis wurde mittels EDV automatisch erstellt und besitzt auch ohne Unterschrift seine Gültigkeit.') 
 
       elements.append(im)
       elements.append(Spacer(21.7*cm,7.8*cm))
@@ -611,7 +611,7 @@ def storno(request,pk):
         canvas.drawString(1.7*cm,22.5*cm,rg.empfänger.land)
         canvas.drawString(1.7*cm,22.1*cm,rg.empfänger.contact)
         canvas.setFont('Helvetica', 7)
-        canvas.drawString(1.7*cm,24.05*cm,'Ali Palabiyik * Jevenstedter Straße 175 * 22547 Hamburg')
+        canvas.drawString(1.7*cm,24.05*cm,'Haydar Buldak * Liebigstraße 2 - 20 * 22113 Hamburg')
 
         canvas.setFont('Helvetica', 10)
         canvas.drawString(1.7*cm,18*cm,'Sehr geehrte Damen und Herren,')
@@ -624,10 +624,10 @@ def storno(request,pk):
 
         
         styles = getSampleStyleSheet()
-        data = [['Ali Palabiyik Logistik Express','Tel.: 0176/7022 1652','Targo Bank'],
-                ['Inh. Ali Palabiyik','E-Mail: Alipalabiyik1@outlook.de','IBAN: DE60300209005380642927'],
-                ['Jevenstedterstraße 175','','Kto.-Inh.: Ali Palabiyik'],
-                ['22547 Hamburg','','Steuer-Nr.:41/178/01662 FA Hamburg']]
+        data = [['Melo GmbH','Tel.: 01577/911 29 90','HypoVereinsbank'],
+                ['Inh. Haydar Buldak','E-Mail: B.Logistik@web.de','IBAN: DE91700202700042877450'],
+                ['Liebigstraße 2-20','','Kto.-Inh.: Haydar Buldak'],
+                ['22113 Hamburg','','Steuer-Nr.:46/742/04073 FA Hamburg']]
         table = Table(data,colWidths=[6*cm,6*cm,6*cm], rowHeights=[0.3*cm,0.3*cm,0.3*cm,0.3*cm])
         table.hAlign = 'CENTER'
         table.setStyle([('ALIGN', (0, 0),(-1, -1), 'LEFT'),
@@ -653,10 +653,10 @@ def storno(request,pk):
         canvas.setLineWidth(1)
         canvas.line(0*cm,1.6*cm,21.7*cm,1.6*cm)
         canvas.saveState()
-        data = [['Ali Palabiyik Logistik Express','Tel.: 0176/7022 1652','Targo Bank'],
-                ['Inh. Ali Palabiyik','E-Mail: Alipalabiyik1@outlook.de','IBAN: DE60300209005380642927'],
-                ['Jevenstedterstraße 175','','Kto.-Inh.: Ali Palabiyik'],
-                ['22547 Hamburg','','Steuer-Nr.:41/178/01662 FA Hamburg']]
+        data = [['Melo GmbH','Tel.: 01577/911 29 90','HypoVereinsbank'],
+                ['Inh. Haydar Buldak','E-Mail: B.Logistik@web.de','IBAN: DE91700202700042877450'],
+                ['Liebigstraße 2-20','','Kto.-Inh.: Haydar Buldak'],
+                ['22113 Hamburg','','Steuer-Nr.:46/742/04073 FA Hamburg']]
         table = Table(data,colWidths=[6*cm,6*cm,6*cm], rowHeights=[0.3*cm,0.3*cm,0.3*cm,0.3*cm])
         table.hAlign = 'CENTER'
         table.setStyle([('ALIGN', (0, 0),(-1, -1), 'LEFT'),
