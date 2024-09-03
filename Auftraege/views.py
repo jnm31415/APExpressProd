@@ -271,7 +271,7 @@ def invoice(request,pk):
       def myFirstPage(canvas, doc):
         #Draws the invoice header
         canvas.setFont('Helvetica-Bold', 24)
-        canvas.drawString(13.8 * cm, 25 * cm, 'Rechnung')
+        canvas.drawString(13.8 * cm, 27 * cm, 'MELO GmbH')
         canvas.setStrokeColorRGB(0.13, 0.25, 0.27)
         canvas.setFillColorRGB(0.2, 0.2, 0.2)
         canvas.setFont('Helvetica-Bold', 16)
