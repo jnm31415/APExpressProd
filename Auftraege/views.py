@@ -478,7 +478,7 @@ def pod(request,pk):
       par = Paragraph('Sehr geehrte Damen und Herren, <br /> folgende Auftragspositionen wurden von der Firma "Melo GmbH" ausgeführt. Die ausgezeichneten Unterschriften wurden elektronisch aufgezeichnet und gelten als Bestätigung der Ablieferung. Dieser Abliefernachweis wurde mittels EDV automatisch erstellt und besitzt auch ohne Unterschrift seine Gültigkeit.') 
 
       #elements.append(im)
-      elements.append(Spacer(21.7*cm,7.8*cm))
+      elements.append(Spacer(21.7*cm,9.8*cm))
       elements.append(par)
       elements.append(Spacer(21.7*cm,0.5*cm))
       elements.append(t)
