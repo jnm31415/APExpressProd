@@ -212,7 +212,7 @@ def invoice(request,pk):
 
   def generate_pdf(request):
       response = HttpResponse(content_type='application/pdf')
-      response['Content-Disposition'] = 'filename="AP_Rechnung"' + rg.rechnungsnummer + "_" + str(rg.rechnungsdatum) + ".pdf"
+      response['Content-Disposition'] = 'filename="MELO_Rechnung"' + rg.rechnungsnummer + "_" + str(rg.rechnungsdatum) + ".pdf"
 
       doc = SimpleDocTemplate(response, pagesize=A4,rightMargin=2*cm, leftMargin=2*cm, topMargin=1*cm, bottomMargin=2.5*cm, title="Rechnung")
       Title = 'Test'
@@ -294,7 +294,7 @@ def invoice(request,pk):
         canvas.drawString(1.7*cm,22.5*cm,rg.empfänger.land)
         canvas.drawString(1.7*cm,22.1*cm,rg.empfänger.contact)
         canvas.setFont('Helvetica', 7)
-        canvas.drawString(1.7*cm,24.05*cm,'Ali Palabiyik * Jevenstedter Straße 175 * 22547 Hamburg')
+        canvas.drawString(1.7*cm,24.05*cm,'Haydar Buldak * Liebigstraße 2 - 20 * 22113 Hamburg')
 
         canvas.setFont('Helvetica', 10)
         canvas.drawString(1.7*cm,18*cm,'Sehr geehrte Damen und Herren,')
@@ -307,10 +307,10 @@ def invoice(request,pk):
 
         
         styles = getSampleStyleSheet()
-        data = [['Ali Palabiyik Logistik Express','Tel.: 0176/7022 1652','Targo Bank'],
-                ['Inh. Ali Palabiyik','E-Mail: Alipalabiyik1@outlook.de','IBAN: DE60300209005380642927'],
-                ['Jevenstedterstraße 175','','Kto.-Inh.: Ali Palabiyik'],
-                ['22547 Hamburg','','Steuer-Nr.:41/178/01662 FA Hamburg']]
+        data = [['Melo GmbH','Tel.: 01577/911 29 90','HypoVereinsbank'],
+                ['Inh. Haydar Buldak','E-Mail: B.Logistik@web.de','IBAN: DE91700202700042877450'],
+                ['Liebigstraße 2-20','','Kto.-Inh.: Haydar Buldak'],
+                ['22113 Hamburg','','Steuer-Nr.:46/742/04073 FA Hamburg']]
         table = Table(data,colWidths=[6*cm,6*cm,6*cm], rowHeights=[0.3*cm,0.3*cm,0.3*cm,0.3*cm])
         table.hAlign = 'CENTER'
         table.setStyle([('ALIGN', (0, 0),(-1, -1), 'LEFT'),
@@ -437,10 +437,14 @@ def pod(request,pk):
         canvas.saveState()
         
         styles = getSampleStyleSheet()
-        data = [['Ali Palabiyik Logistik Express','Tel.: 0176/7022 1652','Targo Bank'],
-                ['Inh. Ali Palabiyik','E-Mail: Alipalabiyik1@outlook.de','IBAN: DE60300209005380642927'],
-                ['Jevenstedterstraße 175','','Kto.-Inh.: Ali Palabiyik'],
-                ['22547 Hamburg','','Steuer-Nr.:41/178/01662 FA Hamburg']]
+        data = [['Melo GmbH','Tel.: 01577/911 29 90','HypoVereinsbank'],
+                ['Inh. Haydar Buldak','E-Mail: B.Logistik@web.de','IBAN: DE91700202700042877450'],
+                ['Liebigstraße 2-20','','Kto.-Inh.: Haydar Buldak'],
+                ['22113 Hamburg','','Steuer-Nr.:46/742/04073 FA Hamburg']]
+        #data = [['Ali Palabiyik Logistik Express','Tel.: 0176/7022 1652','Targo Bank'],
+        #        ['Inh. Ali Palabiyik','E-Mail: Alipalabiyik1@outlook.de','IBAN: DE60300209005380642927'],
+        #        ['Jevenstedterstraße 175','','Kto.-Inh.: Ali Palabiyik'],
+        #        ['22547 Hamburg','','Steuer-Nr.:41/178/01662 FA Hamburg']]
         table = Table(data,colWidths=[7*cm,7*cm,7*cm], rowHeights=[0.3*cm,0.3*cm,0.3*cm,0.3*cm])
         table.hAlign = 'CENTER'
         table.setStyle([('ALIGN', (0, 0),(-1, -1), 'LEFT'),
