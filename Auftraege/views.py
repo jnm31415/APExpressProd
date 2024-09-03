@@ -353,7 +353,7 @@ def invoice(request,pk):
         canvas.setFont('Helvetica',10)
         #pagenumber(canvas,doc)
        
-      elements.append(im)
+      #elements.append(im)
       elements.append(Spacer(21.7*cm,9.3*cm))
       elements.append(t)
       elements.append(Spacer(21.7*cm,0.5*cm))
