@@ -275,7 +275,7 @@ def invoice(request,pk):
         canvas.setStrokeColorRGB(0.13, 0.25, 0.27)
         canvas.setFillColorRGB(0.2, 0.2, 0.2)
         canvas.setFont('Helvetica-Bold', 16)
-        canvas.drawString(1.7 * cm, 20 * cm, 'Rechnung')
+        canvas.drawString(1.7 * cm, 19 * cm, 'Rechnung')
         canvas.setFont('Helvetica', 6)
         canvas.drawString(13.8*cm,21.4*cm,'*Bitte bei Schrift- und Zahlungsverkehr angeben*')
         canvas.setFont('Helvetica', 10)
@@ -354,7 +354,7 @@ def invoice(request,pk):
         #pagenumber(canvas,doc)
        
       #elements.append(im)
-      elements.append(Spacer(21.7*cm,12.3*cm))
+      elements.append(Spacer(21.7*cm,11 *cm))
       elements.append(t)
       elements.append(Spacer(21.7*cm,0.5*cm))
       elements.append(table2)
