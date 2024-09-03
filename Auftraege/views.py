@@ -267,9 +267,11 @@ def invoice(request,pk):
       
 
       rtext = Paragraph(rg.rechnungstext)
-      im = Image('/var/task/staticfiles_build/static/LogoAP.jpg',4*cm,2*cm,hAlign='RIGHT')
+      #im = Image('/var/task/staticfiles_build/static/LogoAP.jpg',4*cm,2*cm,hAlign='RIGHT')
       def myFirstPage(canvas, doc):
         #Draws the invoice header
+        canvas.setFont('Helvetica-Bold', 24)
+        canvas.drawString(13.8 * cm, 25 * cm, 'Rechnung')
         canvas.setStrokeColorRGB(0.13, 0.25, 0.27)
         canvas.setFillColorRGB(0.2, 0.2, 0.2)
         canvas.setFont('Helvetica-Bold', 16)
