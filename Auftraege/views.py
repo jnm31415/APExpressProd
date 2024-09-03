@@ -354,7 +354,7 @@ def invoice(request,pk):
         #pagenumber(canvas,doc)
        
       #elements.append(im)
-      elements.append(Spacer(21.7*cm,10.3*cm))
+      elements.append(Spacer(21.7*cm,12.3*cm))
       elements.append(t)
       elements.append(Spacer(21.7*cm,0.5*cm))
       elements.append(table2)
