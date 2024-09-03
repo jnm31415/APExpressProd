@@ -410,9 +410,11 @@ def pod(request,pk):
                             ('BACKGROUND',(0,1),(-1,-1),colors.white),
                             ('GRID',(0,0),(-1,-1),1,colors.black)]))
       
-      im = Image('/var/task/staticfiles_build/static/LogoAP.jpg',4*cm,2*cm,hAlign='RIGHT')
+      #im = Image('/var/task/staticfiles_build/static/LogoAP.jpg',4*cm,2*cm,hAlign='RIGHT')
       def myFirstPage(canvas, doc):
         #Draws the invoice header
+        canvas.setFont('Helvetica-Bold', 24)
+        canvas.drawString(13.8 * cm, 27 * cm, 'MELO GmbH')
         canvas.setStrokeColorRGB(0.13, 0.25, 0.27)
         canvas.setFillColorRGB(0.2, 0.2, 0.2)
         canvas.setFont('Helvetica-Bold', 16)
@@ -475,7 +477,7 @@ def pod(request,pk):
         table.drawOn(canvas, doc.leftMargin+0.5*cm,h-1.2*cm)
       par = Paragraph('Sehr geehrte Damen und Herren, <br /> folgende Auftragspositionen wurden von der Firma "Melo GmbH" ausgeführt. Die ausgezeichneten Unterschriften wurden elektronisch aufgezeichnet und gelten als Bestätigung der Ablieferung. Dieser Abliefernachweis wurde mittels EDV automatisch erstellt und besitzt auch ohne Unterschrift seine Gültigkeit.') 
 
-      elements.append(im)
+      #elements.append(im)
       elements.append(Spacer(21.7*cm,7.8*cm))
       elements.append(par)
       elements.append(Spacer(21.7*cm,0.5*cm))
