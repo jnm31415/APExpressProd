@@ -584,9 +584,11 @@ def storno(request,pk):
       
 
       rtext = Paragraph(rg.rechnungstext)
-      im = Image('/var/task/staticfiles_build/static/LogoAP.jpg',4*cm,2*cm,hAlign='RIGHT')
+      #im = Image('/var/task/staticfiles_build/static/LogoAP.jpg',4*cm,2*cm,hAlign='RIGHT')
       def myFirstPage(canvas, doc):
         #Draws the invoice header
+        canvas.setFont('Helvetica-Bold', 24)
+        canvas.drawString(13.8 * cm, 27 * cm, 'MELO GmbH')
         canvas.setStrokeColorRGB(0.13, 0.25, 0.27)
         canvas.setFillColorRGB(0.2, 0.2, 0.2)
         canvas.setFont('Helvetica-Bold', 16)
@@ -670,8 +672,8 @@ def storno(request,pk):
         canvas.setFont('Helvetica',10)
         #pagenumber(canvas,doc)
        
-      elements.append(im)
-      elements.append(Spacer(21.7*cm,9.3*cm))
+      #elements.append(im)
+      elements.append(Spacer(21.7*cm,11.3*cm))
       elements.append(t)
       elements.append(Spacer(21.7*cm,0.5*cm))
       elements.append(table2)
